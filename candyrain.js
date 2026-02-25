@@ -1,36 +1,49 @@
-class CandyRain {
-  constructor(count = 120) {
-    this.candies = [];
-    this.colors = ['#ffb6c1','#ffc8dd','#ffe066','#caffbf','#bde0fe','#f5e1ff'];
+class CandyRain{
+  constructor(x,y,z){
+    this.x=x;
+    this.y=y;
+    this.z=z;
+    this.speed= rnd(0.05,0.12);
 
-    for (let i = 0; i < count; i++) {
-      const c = document.createElement('a-sphere');
-      c.setAttribute('radius', 0.15 + Math.random() * 0.15);
-      c.setAttribute('color', this.colors[Math.floor(Math.random()*this.colors.length)]);
-      c.setAttribute('position', {
-        x: rnd(-40,40),
-        y: rnd(10,50),
-        z: rnd(-40,40)
-      });
-      scene.append(c);
+    this.obj = document.createElement("a-entity");
 
-      this.candies.push({
-        el: c,
-        speed: rnd(0.02,0.05)
-      });
-    }
+    let center = document.createElement("a-sphere");
+    center.setAttribute("radius",0.35);
+    center.setAttribute("color", "#ffb6c1");
+    center.setAttribute("position", "0 0 0"); // center
+    this.obj.append(center);
+
+    let leftside = document.createElement("a-cone");
+    leftside.setAttribute("radius-bottom", 0.25);
+    leftside.setAttribute("radius-top", 0);
+    leftside.setAttribute("height", 0.5);
+    leftside.setAttribute("color", "#ffb6c1");
+    leftside.setAttribute("position", "0 0.4 0");
+    this.obj.append(leftside);
+
+    let rightside = document.createElement("a-cone");
+    rightside.setAttribute("radius-bottom", 0.25);
+    rightside.setAttribute("radius-top", 0);
+    rightside.setAttribute("height", 0.5);
+    rightside.setAttribute("color", "#ffb6c1");
+    rightside.setAttribute("position", "0 -0.4 0");
+    rightside.setAttribute("rotation", "180 0 0");
+    this.obj.append(rightside);
+
+    this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
+    scene.append(this.obj);
   }
 
-  update() {
-    this.candies.forEach(c => {
-      let pos = c.el.object3D.position;
-      pos.y -= c.speed;
+  fall(){
+    let pos = this.obj.object3D.position;
+    pos.y -= this.speed;
 
-      if (pos.y < 0) {
-        pos.y = rnd(20,40);
-        pos.x = rnd(-40,40);
-        pos.z = rnd(-40,40);
-      }
-    });
-  }
+    if(pos.y<0){
+      pos.y = rnd(20,50);
+      pos.x = rnd(-40,40);
+      pos.z = rnd(-40,40);
+    
+    this.obj.setAttribute("position",{x: pos.x, y: pos.y, z: pos.z});
+    };
+  };
 }

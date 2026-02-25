@@ -1,95 +1,29 @@
 class CandyIsland {
-  constructor(x,y,z,scale=1){
-    this.x=x;
-    this.y=y;
-    this.z=z;
-    this.baseY=y;
-    this.scale=scale;
+  constructor(x,y,z){
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.baseY = y;
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = 0.01;
+    this.amplitude = .5;
 
-    this.t=Math.random()*Math.PI*2;
+    this.obj = document.createElement("a-gltf-model");
+    this.obj.setAttribute("src","#candyisland");
+    this.obj.setAttribute("position", { x: this.x, y: this.y, z: this.z });
+    this.obj.setAttribute("scale","0.05 0.05 0.05");
 
-    this.dx=rnd(-0.01,0.01);
-    this.dz=rnd(-0.01,0.01);
+    scene.append(this.obj);
 
-    this.candies=[];
-
-    this.create();
-    this.animate();
-    this.addPlaygroundCandies();
-    this.interact();
-  }
-
-  create(){
-    this.el=document.createElement("a-entity");
-    this.el.setAttribute("scale",{x:this.scale,y:this.scale,z:this.scale});
-    this.el.setAttribute("class","clickable");
-
-    const base=document.createElement("a-cylinder");
-    base.setAttribute("radius",2);
-    base.setAttribute("height",1);
-    base.setAttribute("color","#ffd6e7");
-    this.el.append(base);
-
-    const top=document.createElement("a-sphere");
-    top.setAttribute("radius",1.9);
-    top.setAttribute("position","0 0.6 0");
-    top.setAttribute("color","#fff5fb");
-    this.el.append(top);
-
-    scene.append(this.el);
-  }
-
-  animate(){
-    const loop=()=>{
-      this.t+=0.01;
-
-      this.x+=this.dx;
-      this.z+=this.dz;
-
-      if(this.x>45) this.x=-45;
-      if(this.x<-45) this.x=45;
-      if(this.z>45) this.z=-45;
-      if(this.z<-45) this.z=45;
-
-      let yFloat=Math.sin(this.t)*0.7;
-      let rot=Math.sin(this.t*0.3)*8;
-
-      this.el.object3D.rotation.y=rot*Math.PI/180;
-      this.el.setAttribute("position",{x:this.x,y:this.baseY+yFloat,z:this.z});
-
-      this.candies.forEach(c=>c.update());
-
-      requestAnimationFrame(loop);
-    };
-    loop();
-  }
-
-  interact(){
-    this.el.addEventListener("mouseenter",()=>{
-      this.el.setAttribute("scale",`${this.scale*1.1} ${this.scale*1.1} ${this.scale*1.1}`);
-    });
-
-    this.el.addEventListener("mouseleave",()=>{
-      this.el.setAttribute("scale",`${this.scale} ${this.scale} ${this.scale}`);
-    });
-
-    this.el.addEventListener("click",()=>{
-      this.el.setAttribute("animation__squish",{
-        property:"scale",
-        to:`${this.scale*0.9} ${this.scale*0.6} ${this.scale*0.9}`,
-        dur:120,
-        dir:"alternate",
-        loop:1
-      });
+    this.obj.addEventListener("click", () => {
+      camera.setAttribute("position", { x: this.x, y: this.y + 2, z: this.z });
+      camera.setAttribute("wasd-controls", "enabled: false");
     });
   }
 
-  addPlaygroundCandies(count=6){
-    for(let i=0;i<count;i++){
-      const x=this.x+rnd(-1.5,1.5);
-      const y=this.baseY+1+rnd(0,0.5);
-      const z=this.z+rnd(-1.5,1.5);
-      this.candies.push(new Candy(x,y,z));
-    }
+  float(){
+    this.angle += this.speed;
+    this.y = this.baseY + Math.sin(this.angle) * this.amplitude;
+    this.obj.setAttribute("position", { x: this.x, y: this.y, z: this.z });
   }
 }

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Candy Island
+* source:	https://sketchfab.com/3d-models/candy-island-4036c0958661441c8cdb1780561874f1
+* author:	Crazy Cool by Champi & iX.i (https://sketchfab.com/ChampiAndIX.i)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Candy Island" (https://sketchfab.com/3d-models/candy-island-4036c0958661441c8cdb1780561874f1) by Crazy Cool by Champi & iX.i (https://sketchfab.com/ChampiAndIX.i) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

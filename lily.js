@@ -2,13 +2,10 @@ class Lily {
   constructor(x,z){
     this.x=x;
     this.z=z;
-    this.baseY=rnd(6,12);
-
+    this.baseY=rnd(20,40);
     this.dx=rnd(-0.015,0.015);
     this.dz=rnd(-0.015,0.015);
-
     this.t=Math.random()*100;
-
     this.create();
     this.setup();
     this.animate();
