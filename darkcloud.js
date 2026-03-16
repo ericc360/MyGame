@@ -5,6 +5,7 @@ class DarkCloud{
     this.z=z;
     this.speed = rnd(0.01, 0.03);
     this.direction = 1;
+    this.inrange = true;
 
 
     this.obj=document.createElement("a-entity");
@@ -18,7 +19,7 @@ class DarkCloud{
         z:rnd(-1.5,1.5)
       });
       puff.setAttribute("color","#9b9fb5");
-      puff.setAttribute("opacity","0.9");
+      //puff.setAttribute("opacity","0.9");
       puff.setAttribute("shadow","cast:true; receive:true");
       this.obj.append(puff);
     }
@@ -30,10 +31,21 @@ class DarkCloud{
 
   drift(minX = -50, maxX = 50){
     this.x += this.speed * this.direction;
-    if(this.x > maxX || this.x < minX){
-    this.direction *= -1;
+      if(this.x > maxX || this.x < minX){
+      this.direction *= -1;
+    }
+      this.obj.setAttribute("position",{x:this.x,y:this.y,z:this.z});
+    }
+  reposition(){
+    if(this.inrange != true){
+      this.x = rnd(camera.object3D.position.x-50, camera.object3D.position.x+50);
+      this.y = rnd(20,60)
+      this.z = rnd(camera.object3D.position.z-50, camera.object3D.position.z+50),
+      this.obj.setAttribute("position", { x: this.x, y:this.y, z: this.z});
+      this.inrange = true;
+    } else{
+      this.inrange = this.inrange;
+    }
   }
-    this.obj.setAttribute("position",{x:this.x,y:this.y,z:this.z});
-  }
-  }
+}
 
