@@ -8,6 +8,7 @@ class Lollipop{
         this.speed = 0.05;
         this.amplitude = 0.5;
         this.inrange = true;
+        this.collected = false;
 
         this.obj = document.createElement("a-entity");
         this.obj.setAttribute("position", {x:this.x, y: this.y+1, z: this.z});
@@ -50,4 +51,12 @@ class Lollipop{
       this.inrange = this.inrange;
     }
   }
+    checkcollect(){
+
+      if(distance(this.obj,camera)<2){
+        this.collected = true;
+        loot_collected += 1;
+        this.obj.object3D.position.set(9999,9999,9999);
+      }
+    }
 }

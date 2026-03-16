@@ -3,6 +3,13 @@ class marshmallows{
     this.x = x;
     this.y = y;
     this.z = z;
+    this.baseY = y + 1;
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = 0.05;
+    this.amplitude = 0.5;
+    this.inrange = true;
+    this.collected = false;
+
 
     this.obj = document.createElement("a-cylinder");
     this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
@@ -13,15 +20,15 @@ class marshmallows{
 
     }
 
-        float(){
-        this.angle += this.speed;
-        this.y = this.baseY + Math.sin(this.angle) * this.amplitude;
-        this.obj.setAttribute("position",{x:this.x,y:this.y,z:this.z});
+    float(){
+    this.angle += this.speed;
+    this.y = this.baseY + Math.sin(this.angle) * this.amplitude;
+    this.obj.setAttribute("position",{x:this.x,y:this.y,z:this.z});
     }
     reposition(){
     if(this.inrange != true){
       this.x = rnd(camera.object3D.position.x-50, camera.object3D.position.x+50);
-      this.y = rnd(20,60)
+      this.y = rnd(20,60);
       this.z = rnd(camera.object3D.position.z-50, camera.object3D.position.z+50),
       this.obj.setAttribute("position", { x: this.x, y:this.y, z: this.z});
       this.inrange = true;
@@ -29,4 +36,12 @@ class marshmallows{
       this.inrange = this.inrange;
     }
 }
+
+checkcollect(){
+      if(distance(this.obj,camera)<2){
+        this.collected = true;
+        loot_collected += 1;
+        this.obj.object3D.position.set(9999,9999,9999);
+      }
+    }
 }

@@ -7,24 +7,32 @@
     <script src="candyrain.js"></script>
     <script src="lollipop.js"></script>
     <script src="darkcloud.js"></script>
+    <script src="bullet.js"></script>
     <script src="marshmallow.js"></script>
     <script src="playerbehaviors.js"></script>
     <script src="script.js"></script>
+   
   </head>
   <body>
 <a-scene>
   <a-entity position="0 2.25 -15" particle-system="color: #EF0000,#44CC00"></a-entity>
 <a-assets>
  <a-asset-item id="candyisland" src="candy_island/scene.gltf" ></a-asset-item>
+ <a-asset-item id="robot" src="cat_robot/scene.gltf"></a-asset-item>
  <img id="wrapper" src="pngs/wrapper.webp">
  <img id="cockpit" src="pngs/cockpit.png">
 </a-assets>
 
+<a-gltf-model  src="#robot" position="1 1 1" animation-mixer scale="0.1 0.1 0.1"></a-gltf-model>
  <a-sky src="pngs/PiPic.jpg"></a-sky>
 
 
-<a-camera look-controls="enabled:true" wasd-controls="enabled:false">
-  <a-cursor color="white" opacity="0.3"></a-cursor>
+<a-camera look-controls="enabled:true" wasd-controls="enabled:true" >
+<a-cursor color="white" opacity="0.3">
+<a-text value = "Time: 0/120" position="-1.5 .5 0" id="time" color="black" scale=".7 .7 .7"></a-text>
+<a-text value="hold [Space] to shoot" color="#EDB183" scale=".5 .5 .5" position="-1.5 0 0"></a-text>
+
+  </a-cursor>
 </a-camera>
 </a-scene>
   </body>
