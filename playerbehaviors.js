@@ -72,7 +72,7 @@ class plane{
                 this.texthealth.setAttribute("value", `Health: ${this.textfuelopts[10]}`);
             }
         }
-        this.textloot.setAttribute("value", "Loot collected: " + loot_collected);
+        this.textloot.setAttribute("value", "Loot collected: " + loot_collected + "/50");
 
 
     }
