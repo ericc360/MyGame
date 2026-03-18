@@ -1,13 +1,12 @@
 let rnd=(l,u)=>Math.random()*(u-l)+l;
-let scene,camera,rain,player,bullet,loot_collected=0;
-let clouds=[],islands=[],lollipops=[],candies=[],darkclouds=[],marshmallow=[], timer=0;
+let scene,camera,rain,player,loot_collected=0;
+let clouds=[],islands=[],lollipops=[],candies=[],darkclouds=[],marshmallow=[],robots=[], timer=0;
 
 
 window.addEventListener("DOMContentLoaded",function(){
   scene=document.querySelector("a-scene");
   camera=document.querySelector("a-camera");
   time=this.document.getElementById("time");
-  ammo = document.getElementById("ammo");
   
 
 
@@ -31,6 +30,10 @@ window.addEventListener("DOMContentLoaded",function(){
     let m = new marshmallows(rnd(-60,60), rnd(20,60), rnd(-60,60));
     marshmallow.push(m);
   }
+  for(let i = 0; i < 3; i++){
+  let r = new Robot(rnd(-10,10), 50, rnd(-20,-5));
+  robots.push(r);
+  }
 
   player = new plane();
   this.setInterval(loop, 100);
@@ -39,6 +42,17 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 function loop(){
+  player.damagetaken = false;
+  for(let r of robots){
+    r.follow(camera);
+
+    if(distance(r.obj, camera) < 5){
+        player.health -= 0.15;
+        if(player.health <= 0){
+          time.setAttribute("value","Time: GAME OVER. OUT OF HEALTH!");
+        }
+    }
+}
   for(let cloud of clouds){ 
     if(distance(cloud.obj, camera)>50){
       cloud.inrange = false;
@@ -48,16 +62,17 @@ function loop(){
   }
   for(let dc of darkclouds){ 
     if(distance(dc.obj,camera)>50){
-      dc.inrange = false;
-    }
-    if(distance(dc.obj, camera)<10){
-      player.damagetaken = true;
-    } else {
-      player.damagetaken = false;
-    }
-    dc.drift(-50,50) 
-    dc.reposition();
+    dc.inrange = false;
   }
+  if(distance(dc.obj, camera) < 10){
+    player.health -= 0.15;
+    if(player.health <= 0){
+      time.setAttribute("value", "Time: GAME OVER. OUT OF HEALTH!");
+    }
+  }
+  dc.drift(-50,50);
+  dc.reposition();
+}
   for(let l of lollipops){ 
     if(distance(l.obj, camera)>60){
       l.inrange = false;
@@ -92,7 +107,6 @@ function loop(){
     m.checkcollect();
 }
 
-
 }
 
 function runtime(){
@@ -106,10 +120,14 @@ function countdown(){
   if(loot_collected >= 50 && timer <= 120){
     time.setAttribute("value", "Time: YOU WIN!")
   } else if(timer > 120 && loot_collected < 50){
-    time.setAttribute("value", "Time: GAME OVER BUT YOU WIN")
+    time.setAttribute("value", "Time: GAME OVER!")
   }else {
     time.setAttribute("value", "Time: " + timer +"/120")
   }
+  if(player.health <= 0){
+    player.health = 0;
+    time.setAttribute("value", "Time: GAME OVER. OUT OF HEALTH!");
+}
 }
 
 function distance(obj1,obj2){

@@ -1,39 +1,33 @@
+<!DOCTYPE html>
 <html>
-  <head> 
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.1/dist/aframe-extras.min.js"></script>
-    <script src="cloud.js"></script>
-    <script src="candyisland.js"></script>
-    <script src="candyrain.js"></script>
-    <script src="lollipop.js"></script>
-    <script src="darkcloud.js"></script>
-    <script src="bullet.js"></script>
-    <script src="marshmallow.js"></script>
-    <script src="playerbehaviors.js"></script>
-    <script src="script.js"></script>
-   
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Super Candy Land Plane Scenario</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-<a-scene>
-  <a-entity position="0 2.25 -15" particle-system="color: #EF0000,#44CC00"></a-entity>
-<a-assets>
- <a-asset-item id="candyisland" src="candy_island/scene.gltf" ></a-asset-item>
- <a-asset-item id="robot" src="cat_robot/scene.gltf"></a-asset-item>
- <img id="wrapper" src="pngs/wrapper.webp">
- <img id="cockpit" src="pngs/cockpit.png">
-</a-assets>
-
-<a-gltf-model  src="#robot" position="1 1 1" animation-mixer scale="0.1 0.1 0.1"></a-gltf-model>
- <a-sky src="pngs/PiPic.jpg"></a-sky>
-
-
-<a-camera look-controls="enabled:true" wasd-controls="enabled:true" >
-<a-cursor color="white" opacity="0.3">
-<a-text value = "Time: 0/120" position="-1.5 .5 0" id="time" color="black" scale=".7 .7 .7"></a-text>
-<a-text value="hold [Space] to shoot" color="#EDB183" scale=".5 .5 .5" position="-1.5 0 0"></a-text>
-
-  </a-cursor>
-</a-camera>
-</a-scene>
+    <div class="container" id="banner">
+      <h1>Super Candy Land Plane Scenario</h1>
+    </div>
+    <div class="container" id="body">
+      <div id="snapshot">
+        <img src="pngs/Web.png">
+      </div>
+      <div id="description">
+        <p><b>Air Force Sweet, Ace Pilot Rank #1. How well do you fare in these infinite skies?</b>
+          <p><b>Objective: Collect 50 loot in 120 seconds to WIN!</b></p>
+        <ol>
+          <li>Collect 50 Skies Bounty (Loot)</li>
+          <li>Manage the Fuel and Health of your Plane</li>
+          <li>Evade Dastardly Aggressors and Disastrous Dark Clouds</li>
+        </ol>
+        <p><b>Press R to refuel</b></p>
+        If on a tablet or phone, simply rotating the device in order to collect the items.  If on a desktop, use the mouse and arrows keys to collect the items.
+      </p>
+        <a href="mygame.html" class="button">View</a>
+        <p></p>
+      </div>
+    </div>
   </body>
 </html>

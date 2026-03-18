@@ -34,8 +34,6 @@ class plane{
         this.textloot.setAttribute("color", "yellow")
         this.textloot.setAttribute("scale", ".7 .8 .8")
         this.textloot.setAttribute("value", "Loot collected: 0");
-
-
         this.textfuel = document.createElement("a-text");
         this.textfuel.setAttribute("position", "-2.1 -.7 -1.5"); 
         this.textfuel.setAttribute("color", "#7392B7");
@@ -47,7 +45,7 @@ class plane{
         this.info = document.createElement("a-text");
         this.info.setAttribute("position", "-2.1 1 -1.5"); 
         this.info.setAttribute("color", "white");
-        this.info.setAttribute("value", "WASD to move | E to ascend | Q to descend");
+        this.info.setAttribute("value", "Mouse to move | E/Q to ascend/descend");
         this.plane.setAttribute("src", "#cockpit");
         this.plane.setAttribute("position","0 0 -1.5"); 
         this.plane.setAttribute("scale","4.5 2.6");
@@ -62,9 +60,9 @@ class plane{
     hudbehaviors(){
         for(let i = 0; i<10; i++){
             if(this.fuel<this.textfueloptsparameters[i] && this.fuel>this.textfueloptsparameters[i+1]){
-                this.textfuel.setAttribute("value", `Fuel: ${this.textfuelopts[i]}`);
+                this.textfuel.setAttribute("value", `Fuel:     ${this.textfuelopts[i]}`);
             } else if(this.fuel<=0){
-                this.textfuel.setAttribute("value", `Fuel: ${this.textfuelopts[10]}`);
+                this.textfuel.setAttribute("value", `Fuel:     ${this.textfuelopts[10]}`);
             }
         }
         for(let i = 0; i<10; i++){
@@ -79,7 +77,6 @@ class plane{
 
     }
 
-        
     altitudebehaviors(){
         console.log(this.altitude + " " + this.fuel);
         camera.object3D.position.y = this.altitude;
@@ -101,9 +98,7 @@ class plane{
         } else {
             this.refuelable = true;
         }
-        if(this.damagetaken==true){
-            this.health -= 10;
-        }
+        
     }
 
         movementbehaviors(){
@@ -113,9 +108,6 @@ class plane{
         camera.object3D.position.z -= this.cameradz;
         console.log( camera.object3D.rotation.y)
     }
-
-
-
 
     }
 

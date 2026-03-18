@@ -1,0 +1,36 @@
+<html>
+  <head> 
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.1/dist/aframe-extras.min.js"></script>
+    <script src="cloud.js"></script>
+    <script src="candyisland.js"></script>
+    <script src="candyrain.js"></script>
+    <script src="lollipop.js"></script>
+    <script src="catrobot.js"></script>
+    <script src="darkcloud.js"></script>
+    <script src="marshmallow.js"></script>
+    <script src="playerbehaviors.js"></script>
+    <script src="script.js"></script>
+   
+  </head>
+  <body>
+<a-scene>
+  <a-entity position="0 2.25 -15" particle-system="color: #EF0000,#44CC00"></a-entity>
+<a-assets>
+ <a-asset-item id="candyisland" src="candy_island/scene.gltf" ></a-asset-item>
+ <a-asset-item id="robot" src="cat_robot/scene.gltf"></a-asset-item>
+ <img id="wrapper" src="pngs/wrapper.webp">
+ <img id="cockpit" src="pngs/cockpit.png">
+</a-assets>
+
+ <a-sky src="pngs/PiPic.jpg"></a-sky>
+
+<a-camera look-controls="enabled:true" wasd-controls="enabled:true" >
+<a-cursor color="white" opacity="0.3">
+<a-text value = "Time: 0/120" position="-1.4 -.3 0" id="time" color="black" scale=".7 .7 .7"></a-text>
+
+  </a-cursor>
+</a-camera>
+</a-scene>
+  </body>
+</html>

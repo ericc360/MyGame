@@ -18,7 +18,6 @@ class Cloud{
         z:rnd(-1.5,1.5)
       });
       puff.setAttribute("color","#ffffff");
-      //puff.setAttribute("opacity","0.7");
       this.obj.append(puff);
     }
 

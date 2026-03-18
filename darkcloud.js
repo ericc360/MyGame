@@ -19,7 +19,6 @@ class DarkCloud{
         z:rnd(-1.5,1.5)
       });
       puff.setAttribute("color","#9b9fb5");
-      //puff.setAttribute("opacity","0.9");
       puff.setAttribute("shadow","cast:true; receive:true");
       this.obj.append(puff);
     }
